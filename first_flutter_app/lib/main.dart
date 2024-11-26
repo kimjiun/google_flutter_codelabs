@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = GeneratorPage();
         break;
       case 1:
-        page = Placeholder();
+        page = FavoritePage();
         break;
       default:
         throw UnimplementedError("NO WIDGET");
@@ -137,6 +137,30 @@ class GeneratorPage extends StatelessWidget {
           ],
         ),
       );
+  }
+}
+
+class FavoritePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+
+    if(appState.favoriteList.isEmpty){
+      return Center(
+        child: Text('no data'),
+      );
+    }
+
+    return Center(
+      child: ListView(
+        children: [
+          Padding(padding: EdgeInsets.all(20)),
+
+          for(var word in appState.favoriteList)
+            ListTile(leading: Icon(Icons.favorite), title: Text(word.asSnakeCase))
+        ],
+      ),
+    );
   }
 }
 
