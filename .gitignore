@@ -1,0 +1,9 @@
+**/build
+**/.dart_tool
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/ios/Pods
+**/android/app/build
+*.log
+*.tmp
+**/.idea
