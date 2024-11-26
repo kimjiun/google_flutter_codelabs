@@ -41,16 +41,48 @@ class MyHomePage extends StatelessWidget {
     var pair = appState.current;
 
     return Scaffold(
-      body: Column(
-        children: [
-          Text('A random AWESOME idea:'),
-          Text("${appState.current.asLowerCase} ㅁ나우미우미나우"),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('A random AWESOME idea:'),
+            BigCard(pair: pair),
+            SizedBox(height: 50, width: 50),
+            ElevatedButton(onPressed: (){
+              print("BUTTON CLICKED");
+              appState.getNext();
+            }, child: Text('CLICK'))
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-          ElevatedButton(onPressed: (){
-            print("BUTTON CLICKED");
-            appState.getNext();
-          }, child: Text('CLICK'))
-        ],
+class BigCard extends StatelessWidget {
+  const BigCard({
+    super.key,
+    required this.pair,
+  });
+
+  final WordPair pair;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final style = theme.textTheme.displayMedium!.copyWith(
+      color: theme.colorScheme.onPrimary
+    );
+
+    return Card(
+      color: theme.colorScheme.primary,
+      elevation: 4,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text("${pair.asLowerCase} ㅁ나우미우미나우",
+          style: style,
+          semanticsLabel: "${pair.first} ${pair.second}",
+        ),
       ),
     );
   }
